@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>22077009d_Cinema_Ticket_Selling_System</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <style>
+        :root {
+            --header-bg-color: rgba(52, 58, 64, 0.9);
+            --footer-bg-color: #343a40;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+            position: relative; 
+            overflow: auto; 
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('assets/cinema.jpg') center center / cover no-repeat;
+            filter: blur(8px);
+            z-index: 0;
+        }
+
+        main {
+            flex: 1;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header-logo {
+            max-height: 80px;
+            margin: 0 auto;
+        }
+
+        .navbar {
+            background-color: var(--header-bg-color);
+            align-items: flex-end; 
+            padding: 0.5rem 1rem; 
+        }
+
+        .title {
+            font-size: 50px;
+            font-family: 'Times New Roman', serif;
+            font-weight: bold;
+        }
+
+        .buttons .btn {
+            background-color: transparent;
+            color: white;
+            border: none; 
+            transition: color 0.3s ease;
+        }
+
+        .buttons .btn.active,
+        .buttons .btn:hover {
+            color: orange; 
+        }
+
+        .carousel-item {
+            height: 400px;
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-color: black;
+        }
+
+        .carousel-caption {
+            position: absolute;
+            bottom: 20px;
+            left: 250px; 
+            right: auto;
+            text-align: left;
+            background-color: transparent;
+            border-radius: 5px;
+            z-index: 3;
+        }
+
+        .carousel-caption h5,
+        .carousel-caption p {
+            color: white;
+        }
+
+        .carousel-caption p {
+            line-height: 0.5; 
+        }
+
+        .release-date,
+        .runtime {
+            color: #587ab0; 
+        }
+
+        footer {
+            background-color: var(--footer-bg-color);
+            color: white;
+            z-index: 2;
+        }
+
+        .carousel-control-prev,
+        .carousel-control-next {
+            width: 10%;
+            height: 100%; 
+            top: 50%; 
+            transform: translateY(-50%); 
+        }
+
+        .carousel-control-prev {
+            left: 5%; 
+        }
+
+        .carousel-control-next {
+            right: 5%; 
+        }
+
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            background-color: rgba(0, 0, 0, 0.5); 
+            border-radius: 50%; 
+        }
+
+        .movie-posters {
+            display: flex; 
+            flex-direction: row; 
+            overflow-x: auto; 
+            margin-top: 20px;
+            padding: 10px; 
+            gap: 10px; 
+            margin-left: 250px;
+        }
+
+        .poster {
+            width: 200px; 
+            height: 280px; 
+            background-size: cover; 
+            background-position: center; 
+            flex-shrink: 0; 
+        }
+
+        .more-poster {
+            background-color: black;
+            color: orange;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            font-weight: bold;
+            width: 200px; 
+            height: 280px; 
+            margin-right: 10px; 
+            flex-shrink: 0; 
+            cursor: pointer; 
+        }
+
+        .buttons {
+            text-align: center;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+
+<header class="text-white">
+    <nav class="navbar navbar-expand-lg navbar-dark"> <!--NavBar Stuff-->
+        <div class="container-fluid"> 
+            <a href="index.html">
+                <img src="assets/logo.png" alt="Logo" class="header-logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="movieDetail.html">Movies</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://facebook.com" target="_blank">
+                            <i class="fab fa-facebook"></i> Facebook
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://Instagram.com" target="_blank">
+                            <i class="fab fa-instagram"></i> Instagram
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<main class="container-fluid">  <!--Self Rotating Banner. Can click on arrow to go to previous or next slide-->
+    <div id="featuredFilmsCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="7000">
+        <div class="carousel-inner">
+            <div class="carousel-item active" style="background-image: url('assets/spmNWH.jpg');">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5 class="title">Spider-Man: No Way Home</h5>
+                    <p class="runtime"><strong>Runtime:</strong> 148 mins</p>
+                    <p class="release-date"><strong>Release Date:</strong> December 17, 2023</p>
+                    <p>Peter Parker's secret identity is revealed to the entire world. Desperate for</p>
+                    <p> help, Peter turns to Doctor Strange to make the world forget that he is </p>
+                    <p>Spider-Man. The spell goes horribly wrong and shatters the multiverse, bringing </p>
+                    <p>in monstrous villains that could destroy the world.</p>
+                    <a href="movie1.html" class="btn btn-primary">Buy Ticket</a>
+                </div>
+            </div>
+            <div class="carousel-item" style="background-image: url('assets/batman.jpg');">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5 class="title">The Batman</h5>
+                    <p class="runtime"><strong>Runtime:</strong> 176 mins</p>
+                    <p class="release-date"><strong>Release Date:</strong> March 4, 2022</p>
+                    <p>The film sees Batman, in his second year fighting crime in Gotham City, </p>
+                    <p>uncover corruption with ties to his own family while pursuing the Riddler,</p>
+                    <p>a mysterious serial killer targeting the city's elite.</p>
+                    <a href="movie2.html" class="btn btn-primary">Buy Ticket</a>
+                </div>
+            </div>
+            <div class="carousel-item" style="background-image: url('assets/kickass.jpg.avif');">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5 class="title">Kick-Ass</h5>
+                    <p class="runtime"><strong>Runtime:</strong> 117 mins</p>
+                    <p class="release-date"><strong>Release Date:</strong> April 15, 2010</p>
+                    <p>Using his love for comics as inspiration, teenager Dave Lizewski</p>
+                    <p>decides to reinvent himself as a superhero despite a complete lack </p>
+                    <p>of special powers. Dave dons a costume, dubs himself "Kick-Ass,"</p>
+                    <p>and gets to work fighting crime.</p>
+                    <a href="movie3.html" class="btn btn-primary">Buy Ticket</a>
+                </div>
+            </div>
+            <div class="carousel-item" style="background-image: url('assets/hornet.jpg');">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5 class="title">The Green Hornet</h5>
+                    <p class="runtime"><strong>Runtime:</strong> 119 min</p>
+                    <p class="release-date"><strong>Release Date:</strong> January 14, 2011</p>
+                    <p>Britt Reid (Seth Rogen) is a slacker by day, party animal by night...</p>
+                    <p>until he finds a serious career that's seriously cool: crime-fighting</p>
+                    <p>action hero. As the Green Hornet, he teams up with gadget wiz and </p>
+                    <p>martial arts master Kato (Jay Chou) to take down LA's underworld.</p>
+                    <a href="movie4.html" class="btn btn-primary">Buy Ticket</a>
+                </div>
+            </div>
+            <div class="carousel-item" style="background-image: url('assets/watchmen.jpg');">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5 class="title">Watchmen</h5>
+                    <p class="runtime"><strong>Runtime:</strong> 162 min</p>
+                    <p class="release-date"><strong>Release Date:</strong> March 6, 2009</p>
+                    <p>In an alternate 1985 America, costumed superheroes are part of</p>
+                    <p>everyday life. When one of his former comrades is murdered, </p>
+                    <p>masked vigilante Rorschach (Jackie Earle Haley) uncovers a plot to</p>
+                    <p>kill and discredit all past and present superheroes.</p>
+                    <a href="movie5.html" class="btn btn-primary">Buy Ticket</a>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#featuredFilmsCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#featuredFilmsCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+    <!-- Movie Posters Section -->
+    <div class="buttons">
+        <button class="btn" id="ticketingBtn">Ticketing</button>
+        <button class="btn" id="comingSoonBtn">Coming Soon</button>
+    </div>
+
+    <div class="movie-posters" id="moviePosters">
+        <a href="movie1.html" class="poster" style="background-image: url('assets/spmNWHPoster.jpg');"></a>
+        <a href="movie2.html" class="poster" style="background-image: url('assets/batmanPoster.jpg');"></a>
+        <a href="movie3.html" class="poster" style="background-image: url('assets/kickassPoster.jpg');"></a>
+        <a href="movie4.html" class="poster" style="background-image: url('assets/hornetPoster.jpg');"></a>
+        <a href="movie5.html" class="poster" style="background-image: url('assets/watchmen.jpg');"></a>
+        <div class="more-poster" onclick="window.location='movieDetail.html';">More ></div>
+    </div>
+
+    <div class="movie-posters" id="comingSoonPosters" style="display: none;">
+        <div class="poster" style="background-image: url('assets/ff4Poster.jpg');"></div>
+        <div class="poster" style="background-image: url('assets/pdyPoster.jpg');"></div>
+        <div class="poster" style="background-image: url('assets/dsdjPoster.jpg');"></div>
+        <div class="poster" style="background-image: url('assets/supermanPoster.jpg');"></div>
+        <div class="poster" style="background-image: url('assets/dpwPoster.jpg');"></div>
+        <div class="more-poster" onclick="window.location='comingSoon.html';">More ></div>
+    </div>
+</main>
+
+<footer class="text-white text-center p-3">
+    © 22077009d Student Name - EIE4432 Cinema Ticket Selling Project
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('#ticketingBtn').addClass('active');
+
+        $('#ticketingBtn').click(function() {
+            $('#moviePosters').show();
+            $('#comingSoonPosters').hide();
+            $('.btn').removeClass('active');
+            $(this).addClass('active'); 
+        });
+
+        $('#comingSoonBtn').click(function() {
+            $('#comingSoonPosters').show();
+            $('#moviePosters').hide();
+            $('.btn').removeClass('active');
+            $(this).addClass('active'); 
+        });
+    });
+</script>
+
+</body>
+</html>

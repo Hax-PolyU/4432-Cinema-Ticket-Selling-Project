@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>22077009d_Cinema_Ticket_Selling_System</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <style>
+        :root {
+            --header-bg-color: rgba(52, 58, 64, 0.9);
+            --footer-bg-color: #343a40;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #222;
+            position: relative;
+        }
+
+        .background-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('assets/cinema.jpg') center center / cover no-repeat;
+            filter: blur(8px);
+            z-index: -1;
+        }
+
+        header {
+            z-index: 1;
+        }
+
+        .seat-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .black-box {
+            width: 600px;
+            height: 700px;
+            background-color: black;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .seat-map {
+            width: 100%;
+            height: 500px;
+            display: grid;
+            grid-template-columns: 40px repeat(10, 1fr) 40px;
+            gap: 0;
+            padding: 10px;
+            z-index: 1;
+        }
+
+        .seat {
+            background-color: transparent;
+            border: 2px solid rgb(243, 118, 40);
+            color: rgb(243, 118, 40);
+            cursor: pointer;
+            padding: 7px;
+            text-align: center;
+            transition: background-color 0.3s, color 0.3s;
+            border-radius: 5px;
+            font-size: 0.8em;
+        }
+
+        .seat.selected {
+            background-color: rgb(243, 118, 40);
+            color: white;
+        }
+
+        .label {
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            font-size: 0.8em;
+        }
+
+        .left-label, .right-label {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 10px 0;
+            color: white;
+        }
+
+        footer {
+            background-color: var(--footer-bg-color);
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            z-index: 1;
+        }
+
+        .movie-info {
+            text-align: left;
+            margin-left: 10px;
+            color: white;
+            z-index: 1;
+            position: relative;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 80%;
+        }
+
+        .movie-poster {
+            width: 200px;
+            height: auto;
+            border: 2px solid white;
+            box-shadow: 0 0 10px white;
+            border-radius: 5px;
+            margin: 20px 10px 20px 0;
+        }
+
+        h1 {
+            font-size: 2.5em;
+        }
+
+        .info-container {
+            margin-left: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .screen-line {
+            width: 85%;
+            height: 2px;
+            background-color: rgb(169, 171, 174);
+            margin-top: 100px;
+        }
+
+        .screen-text {
+            text-align: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-top: 15px;
+        }
+
+        .button-BUY {
+            align-items: center;
+            background-color: #fff;
+            border: 2px solid #000;
+            box-sizing: border-box;
+            color: #000;
+            cursor: pointer;
+            display: inline-flex;
+            fill: #000;
+            font-family: Inter, sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            height: 48px;
+            justify-content: center;
+            letter-spacing: -.8px;
+            line-height: 24px;
+            min-width: 140px;
+            outline: 0;
+            padding: 0 17px;
+            text-align: center;
+            text-decoration: none;
+            transition: all .3s;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            margin-top: 20px; /* Space above the button */
+        }
+
+        .button-BUY:focus {
+            color: #171e29;
+        }
+
+        .button-BUY:hover {
+            border-color: #06f;
+            color: #06f;
+            fill: #06f;
+        }
+
+        .button-BUY:active {
+            border-color: #06f;
+            color: #06f;
+            fill: #06f;
+        }
+
+        @media (min-width: 768px) {
+            .button-BUY {
+                min-width: 170px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .black-box {
+                width: 100%;
+            }
+            .movie-info {
+                margin-left: 0;
+                text-align: center;
+            }
+            .info-container {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="background-image"></div>
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: var(--header-bg-color);">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">
+                <img src="assets/logo.png" alt="Logo" class="header-logo" style="max-height: 80px;">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="movieDetail.html">Movies</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://facebook.com" target="_blank">
+                            <i class="fab fa-facebook"></i> Facebook
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://twitter.com" target="_blank">
+                            <i class="fab fa-instagram"></i> Instagram
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<main class="container-fluid">
+    <div class="info-container">
+        <img id="movie-poster" class="movie-poster" src="" alt="Movie Poster">
+        <div class="movie-info">
+            <h1 id="movie-title">Movie Title</h1>
+            <p><strong>Date:</strong> <span id="selected-date">N/A</span></p>
+            <p><strong>Time:</strong> <span id="selected-time">N/A</span></p>
+        </div>
+    </div>
+
+    <div class="seat-container">
+        <div class="black-box">
+            <div class="seat-map">
+                <script>
+                    for (let row = 0; row < 10; row++) {
+                        document.write(`<div class="left-label"><div class="label">${String.fromCharCode(65 + row)}</div></div>`);
+                        for (let seat = 1; seat <= 10; seat++) {
+                            document.write(`<button class="seat" data-row="${String.fromCharCode(65 + row)}" data-seat="${seat}">${seat}</button>`);
+                        }
+                        document.write(`<div class="right-label"><div class="label">${String.fromCharCode(65 + row)}</div></div>`);
+                    }
+                </script>
+            </div>
+            <div class="screen-line"></div>
+            <div class="screen-text">Silver Screen</div>
+            <a href="pay.html" class="button-BUY" role="button">Buy Ticket</a>
+        </div>
+    </div>
+</main>
+
+<footer>
+    © 22077009d Student Name - Cinema Seat Selection Project
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    function getUrlParams() {
+        const params = {};
+        const queryString = window.location.search.substring(1);
+        const regex = /([^&=]+)=([^&]*)/g;
+        let m;
+        while (m = regex.exec(queryString)) {
+            params[decodeURIComponent(m[1])] = decodeURIComponent(m[2]);
+        }
+        return params;
+    }
+
+    const params = getUrlParams();
+
+    document.getElementById('selected-date').textContent = params.date || "N/A";
+    document.getElementById('selected-time').textContent = params.time || "N/A";
+    document.getElementById('movie-title').textContent = params.title || "Movie Title";
+    document.getElementById('movie-poster').src = params.poster || 'default-poster.jpg';
+
+    document.querySelectorAll('.seat').forEach(button => {
+        button.addEventListener('click', function() {
+            this.classList.toggle('selected');
+        });
+    });
+</script>
+
+</body>
+</html>
